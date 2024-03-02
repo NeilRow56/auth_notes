@@ -14,15 +14,15 @@ export async function Navbar() {
         <div className="flex items-center gap-x-5">
           <ThemeToggle />
 
-          {userId ? (
+          {!userId ? (
             <div>User Nav</div>
           ) : (
             <div className="flex items-center gap-x-5">
               <Button asChild>
-                <Link href="/sign-in">Sign in</Link>
+                <Link href="/auth/sign-in">Sign in</Link>
               </Button>
               <Button variant="secondary" asChild>
-                <Link href="/sign-up">Sign up</Link>
+                <Link href="/auth/sign-up">Sign up</Link>
               </Button>
             </div>
           )}
