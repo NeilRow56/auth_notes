@@ -7,7 +7,7 @@ async function ProfilePage() {
   const session = await getServerSession(authOptions)
 
   const user = session?.user
-  //   if (!session || !session.user) redirect("/auth/signin");
+  //   if (!session || !session.user) redirect("/auth/sign-in");
 
   return (
     <div className="flex h-screen flex-col items-center  justify-center space-y-8  bg-slate-800  ">
