@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { useTransition } from "react";
-import { toast } from "sonner";
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { useTransition } from 'react'
+import { toast } from 'sonner'
 // import { passwordStrength } from 'check-password-strength'
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input'
 import {
   Form,
   FormControl,
@@ -14,35 +14,36 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button'
 
-import { CardWrapper } from "./CardWrapper";
+import { CardWrapper } from './CardWrapper'
 
-import { Loader2, LogIn, MailIcon } from "lucide-react";
-import { PasswordInput } from "./PasswordInput";
-import { Checkbox } from "../ui/checkbox";
-import Link from "next/link";
-import { RegisterSchema } from "@/schemas";
+import { Loader2, LogIn, MailIcon } from 'lucide-react'
+import { PasswordInput } from './PasswordInput'
+import { Checkbox } from '../ui/checkbox'
+import Link from 'next/link'
+import { RegisterSchema } from '@/schemas'
+import { SubmitButton } from '../dashboard/SubmitButtons'
 
 export const RegisterForm = () => {
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       // agreedTerms: false,
     },
-  });
+  })
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-    console.log(values);
-  };
+    console.log(values)
+  }
 
   return (
     <CardWrapper
@@ -132,7 +133,7 @@ export const RegisterForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex w-full">
-                    {" "}
+                    {' '}
                     Confirm Password
                   </FormLabel>
                   <FormControl>
@@ -164,7 +165,7 @@ export const RegisterForm = () => {
                     </Checkbox>
                   </FormControl>
                   <FormLabel>
-                    I Accept the{" "}
+                    I Accept the{' '}
                     <Link href="/">
                       <span className="text-blue-600">
                         Terms and Conditions
@@ -179,7 +180,7 @@ export const RegisterForm = () => {
           <Button type="submit" className="max-w-[150px]" disabled={isPending}>
             {isPending ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4" /> Processing
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing
               </>
             ) : (
               <>
@@ -190,5 +191,5 @@ export const RegisterForm = () => {
         </form>
       </Form>
     </CardWrapper>
-  );
-};
+  )
+}
