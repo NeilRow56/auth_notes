@@ -12,7 +12,9 @@ const SigninButton = () => {
       {session && session.user ? (
         <>
           <p className="text-xl text-primary">
-            <Link href={'/profile'}>{session.user.email}</Link>
+            <Link
+              href={'/profile'}
+            >{`${session.user.firstName} ${session.user.lastName}`}</Link>
           </p>
 
           <Link
@@ -23,8 +25,7 @@ const SigninButton = () => {
           </Link>
         </>
       ) : (
-        <div className="flex flex-col space-y-6">
-          <p>Already Have an account?</p>
+        <div className="flex items-center gap-4">
           <Button onClick={() => signIn()}>Sign In</Button>
           <Button asChild variant="outline">
             <Link href={'/auth/sign-up'}>Sign Up</Link>
