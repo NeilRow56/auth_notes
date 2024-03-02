@@ -1,7 +1,11 @@
-import Link from "next/link";
+import { LoginForm } from '@/components/auth/LoginForm'
 
 const LoginPage = () => {
-  return <div className="space-y-10 text-red-500">Login Form</div>;
-};
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  )
+}
 
-export default LoginPage;
+export default LoginPage

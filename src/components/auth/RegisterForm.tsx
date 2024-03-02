@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useTransition } from 'react'
 import { toast } from 'sonner'
-// import { passwordStrength } from 'check-password-strength'
+
 import { Input } from '@/components/ui/input'
 import {
   Form,
@@ -25,10 +25,13 @@ import { PasswordInput } from './PasswordInput'
 import { Checkbox } from '../ui/checkbox'
 import Link from 'next/link'
 import { RegisterSchema } from '@/schemas'
-import { SubmitButton } from '../dashboard/SubmitButtons'
+
+import { register } from '@/actions/auth-actions/register'
+import { useRouter } from 'next/navigation'
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -38,11 +41,25 @@ export const RegisterForm = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      // agreedTerms: false,
     },
   })
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-    console.log(values)
+    startTransition(() => {
+      register(values)
+        .then((data) => {
+          if (data?.error) {
+            form.reset()
+            toast.error(data.error)
+          }
+
+          if (data?.success) {
+            form.reset()
+            toast.success(data.success)
+            router.push('/dashboard')
+          }
+        })
+        .catch(() => toast.error('Something went wrong'))
+    })
   }
 
   return (
